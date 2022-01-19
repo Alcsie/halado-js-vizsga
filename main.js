@@ -1,6 +1,7 @@
 class Project {
     oldestCarBtn;
     after2004Btn;
+    before2004Btn;
     searchField;
     searchCarBrandBtn;
     resultTbody;
@@ -8,6 +9,7 @@ class Project {
     constructor() {
         this.oldestCarBtn = document.getElementById('oldestCarBtn');
         this.after2004Btn = document.getElementById('after2004Btn');
+        this.before2004Btn = document.getElementById('before2004Btn');
         this.searchCarBrandBtn = document.getElementById('searchCarBrandBtn');
         this.searchField = document.getElementById('searchField');
         this.resultTbody = document.getElementById('resultTbody');
@@ -15,6 +17,7 @@ class Project {
         this.oldestCarBtn.onclick = this.findOldestCar;
         this.after2004Btn.onclick = this.findCarsAfter2004;
         this.searchCarBrandBtn.onclick = this.searchForCarBrand;
+        this.before2004Btn.onclick = this.findCarsBefore2004;
     }
 
     requestCars = async () => {
@@ -61,7 +64,7 @@ class Project {
         this.putCarsToTable(result);
     }
 
-    findCarsAfter2004 = async () => {
+    findCarsBefore2004 = async () => {
         let cars = await this.requestCars();
         
         let result = [];
@@ -99,6 +102,21 @@ class Project {
             // Üres mező
             this.showErrorMsg('A beviteli mező üres!');
         }
+    }
+
+    ffindCarsBefore2004 = async () => {
+        let cars = await this.requestCars();
+        
+        let result = [];
+        for(let carData of cars) {
+            if(carData.factoryYear < 2004) {
+                result.push(carData);
+            }
+        }
+
+        this.putCarsToTable(result);
+    
+
     }
 }
 
