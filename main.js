@@ -18,6 +18,19 @@ class Project {
         let cars = await respond.json();
         return cars;
     }
+
+    putCarsToTable = (carArray) => {
+        let resultHTML = '';
+        for(let carData of carArray) {
+            resultHTML += 
+            `<tr>
+                <td>${carData.brand}</td>
+                <td>${carData.type}</td>
+                <td>${carData.factoryYear}</td>
+            </tr>`;
+        }
+        this.resultTbody.innerHTML = resultHTML;
+    }
 }
 
 const projectObject = new Project();
